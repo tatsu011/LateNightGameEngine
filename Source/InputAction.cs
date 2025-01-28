@@ -21,6 +21,8 @@ namespace LateNightGameEngine.Source
             Name = name;
             Key = key;
             SecondKey = Keyboard.Key.Unknown;
+
+            Input.AllInputActions.Add(name, this);
         }
 
         public InputAction(string name, Keyboard.Key key, Keyboard.Key secondKey)
@@ -28,6 +30,8 @@ namespace LateNightGameEngine.Source
             Name = name;
             Key = key;
             SecondKey = secondKey;
+            Input.AllInputActions.Add(name, this);
+
         }
 
     }

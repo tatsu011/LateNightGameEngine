@@ -22,6 +22,11 @@ namespace LateNightGameEngine.Source
         //window renderer
         public static RenderWindow App;
 
+        //gameobjects.
+        public static List<GameObject> gameObjects = new List<GameObject>();
+        public static List<GameObject> gameObjectsToAdds = new List<GameObject>();
+        public static List<GameObject> gameObjectsToRemove = new List<GameObject>();
+
         public Engine(uint width,  uint height, string title, Color windowColor)
         {
             //Assign variables.
@@ -67,26 +72,101 @@ namespace LateNightGameEngine.Source
 
         private void App_KeyReleased(object? sender, KeyEventArgs e)
         {
+            Input.GetKeyUp(e);
         }
 
         private void App_KeyPressed(object? sender, KeyEventArgs e)
         {
+            Input.GetKeyDown(e);
+        }
+
+        public static void RegisterGameObjects(GameObject gameObject)
+        {
+            gameObjectsToAdds.Add(gameObject);
+        }
+
+        public static void RemoveGameObject(GameObject gameObject)
+        {
+            gameObjectsToRemove.Add(gameObject);
         }
 
         void GameLoop()
         {
+            LoadObjects();
+            OnLoad();
             while(App.IsOpen)
             {
                 App.DispatchEvents();
                 App.Clear(WindowColor);
+
+                UpdateObjects();
                 OnUpdate();
                 App.Display();
             }
         }
 
+        public void LoadObjects()
+        {
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.OnLoad();
+            }
+        }
+
+        public void UpdateObjects()
+        {
+            if (gameObjects == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < gameObjects.Count; i++)
+            {
+                gameObjects[i].OnUpdate();
+                gameObjects[i].UpdateChildren();
+            }
+
+            if (gameObjectsToAdds.Count > 0)
+            {
+                for (int i = 0; i < gameObjectsToAdds.Count; i++)
+                {
+                    gameObjectsToAdds[i].OnLoad();
+                    gameObjects.Add(gameObjectsToAdds[i]);
+                }
+                gameObjectsToAdds.Clear();
+            }
+
+            if(gameObjectsToRemove.Count > 0)
+            {
+                for(int i = 0;i < gameObjectsToRemove.Count; i++)
+                {
+                    gameObjectsToRemove[i].OnDestroy();
+                    gameObjects.Remove(gameObjectsToRemove[i]);
+                }
+                gameObjectsToRemove.Clear();
+            }
+
+        }
+
         public abstract void OnLoad();
 
-        public virtual void OnUpdate() { }
+        public virtual void OnUpdate() 
+        {
+            
+            if(Input.ActionOnKeyDown("Cancel"))
+            {
+                foreach (GameObject gameObject in gameObjects) 
+                    {
+                        Log.Info($"Gameobject: {gameObject.Tag} at {gameObject.Position.X}, {gameObject.Position.Y}");
+                    }
+            }
+
+            if (Input.ActionKeyHeld("Confirm"))
+            {
+                Console.WriteLine("Charging!");
+            }
+        
+        }
 
         public abstract void OnUnload();
     }
