@@ -22,6 +22,11 @@ namespace LateNightGameEngine.Source
         //window renderer
         public static RenderWindow App;
 
+        //Camera
+        public static View Camera;
+
+        public static List<Camera> AllCameras = new List<Camera>();
+
         //gameobjects.
         public static List<GameObject> gameObjects = new List<GameObject>();
         public static List<GameObject> gameObjectsToAdds = new List<GameObject>();
@@ -44,6 +49,8 @@ namespace LateNightGameEngine.Source
             App.Closed += App_Closed;
             App.Resized += App_Resized;
             App.SetFramerateLimit(60);
+            Camera = App.GetView();
+            App.SetView(Camera);
 
             GameLoop();
         }
@@ -115,6 +122,8 @@ namespace LateNightGameEngine.Source
 
         public void UpdateObjects()
         {
+            Time.UpdateTime();
+
             if (gameObjects == null)
             {
                 return;
@@ -153,18 +162,7 @@ namespace LateNightGameEngine.Source
         public virtual void OnUpdate() 
         {
             
-            if(Input.ActionOnKeyDown("Cancel"))
-            {
-                foreach (GameObject gameObject in gameObjects) 
-                    {
-                        Log.Info($"Gameobject: {gameObject.Tag} at {gameObject.Position.X}, {gameObject.Position.Y}");
-                    }
-            }
-
-            if (Input.ActionKeyHeld("Confirm"))
-            {
-                Console.WriteLine("Charging!");
-            }
+            LevelManager.UpdateLevel();
         
         }
 

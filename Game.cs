@@ -12,19 +12,27 @@ namespace LateNightGameEngine
     {
         public Game() : base(1280,720,"Engine Test", Color.Black) { }
 
-        Player player;
+        
 
         public override void OnLoad()
         {
-            player = new Player(new Vector2(400, 400), Vector2.Zero(), "Player");
+            DemoLevel level1 = new DemoLevel("Demo");
+            DemoLevel2 level2 = new DemoLevel2("Demo2");
+            LevelManager.ChangeLevel("Demo");
         }
 
         public override void OnUnload() { }
 
         public override void OnUpdate()
         {
-            //Log.Info($"Player is at: {player.Position.X}, {player.Position.Y}");
-
+            if(Input.ActionOnKeyDown("Confirm"))
+            {
+                LevelManager.ChangeLevel("Demo2");
+            }
+            if (Input.ActionOnKeyDown("Cancel"))
+            {
+                LevelManager.ChangeLevel("Demo");
+            }
             base.OnUpdate();
         }
     }

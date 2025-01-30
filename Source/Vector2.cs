@@ -23,7 +23,13 @@ namespace LateNightGameEngine.Source
             Y = y;
         }   
 
-        public static Vector2 Zero()
+        public Vector2(float num)
+        {
+            X = num;
+            Y = num;
+        }
+
+        public static Vector2 Zero() //replace this with a Property with gettter method.
         {
             return new Vector2(0, 0);
         }
@@ -40,7 +46,7 @@ namespace LateNightGameEngine.Source
             return new Vector2(X * iNum, Y * iNum);
         }
 
-
+        //Vector/Vector math.
         public static Vector2 operator +(Vector2 a, Vector2 b)
         {
             return new Vector2(a.X + b.X, a.Y + b.Y);
@@ -57,6 +63,25 @@ namespace LateNightGameEngine.Source
         {
             return new Vector2(a.X / b.X, a.Y / b.Y);
         }
+
+        //Vector/float math
+        public static Vector2 operator +(Vector2 a, float b)
+        {
+            return new Vector2(a.X + b, a.Y + b);
+        }
+        public static Vector2 operator -(Vector2 a, float b)
+        {
+            return new Vector2(a.X - b, a.Y - b);
+        }
+        public static Vector2 operator *(Vector2 a, float b)
+        {
+            return new Vector2(a.X * b, a.Y * b);
+        }
+        public static Vector2 operator /(Vector2 a, float b)
+        {
+            return new Vector2(a.X / b, a.Y / b);
+        }
+
 
         //conversion operator for different versions of Vector 2.
         public static implicit operator SFML.System.Vector2f(Vector2 v)

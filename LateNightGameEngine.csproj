@@ -8,7 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aether.Physics2D" Version="2.1.0" />
     <PackageReference Include="SFML.Net" Version="2.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Default Font.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\idle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Run.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\sfx.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
