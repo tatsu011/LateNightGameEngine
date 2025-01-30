@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using nkast.Aether.Physics2D.Dynamics;
+using SFML.Graphics;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,9 @@ namespace LateNightGameEngine.Source
         public static List<GameObject> gameObjects = new List<GameObject>();
         public static List<GameObject> gameObjectsToAdds = new List<GameObject>();
         public static List<GameObject> gameObjectsToRemove = new List<GameObject>();
+
+        //Aether Physics.
+        public static World world = new World();
 
         public Engine(uint width,  uint height, string title, Color windowColor)
         {
@@ -123,6 +127,8 @@ namespace LateNightGameEngine.Source
         public void UpdateObjects()
         {
             Time.UpdateTime();
+            world.Step(Time.deltaTime);
+
 
             if (gameObjects == null)
             {
@@ -134,6 +140,9 @@ namespace LateNightGameEngine.Source
                 gameObjects[i].OnUpdate();
                 gameObjects[i].UpdateChildren();
             }
+
+            if (world.IsLocked) return;
+
 
             if (gameObjectsToAdds.Count > 0)
             {

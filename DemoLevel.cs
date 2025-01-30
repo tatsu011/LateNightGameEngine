@@ -22,6 +22,7 @@ namespace LateNightGameEngine
         {
 
             player = new Player(new Vector2(400, 400), Vector2.Zero(), "Player");
+            player.CollisionDebug(true);
         }
 
         public override void OnUpdate()

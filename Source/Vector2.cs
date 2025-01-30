@@ -88,6 +88,10 @@ namespace LateNightGameEngine.Source
         {
             return new SFML.System.Vector2f(v.X, v.Y);
         }
+        public static implicit operator nkast.Aether.Physics2D.Common.Vector2(Vector2 v)
+        {
+            return new nkast.Aether.Physics2D.Common.Vector2(v.X, v.Y);
+        }
 
         //Eventually operators with int/floats.
 

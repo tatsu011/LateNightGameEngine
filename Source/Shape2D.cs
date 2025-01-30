@@ -17,7 +17,7 @@ namespace LateNightGameEngine.Source
 
         public enum Shapes
         {
-            Rectangle, Circle
+            Rectangle, Circle, Capsule
         }
 
         public Shapes Shape;
@@ -84,7 +84,16 @@ namespace LateNightGameEngine.Source
                     circle.OutlineColor = OutlineColor;
                     circle.OutlineThickness = OutlineThickness;
                     Engine.App.Draw(circle);
-
+                    break;
+                case Shapes.Capsule:
+                    //2 circles and a rectangle in the center.
+                    CircleShape top = new CircleShape(Scale.X / 2);
+                    CircleShape bottom = new CircleShape(Scale.X / 2);
+                    RectangleShape center = new RectangleShape(new Vector2(Scale.X, Scale.Y / 2));
+                    center.Position = Position;
+                    center.FillColor = Color;
+                    center.Origin = Scale * new Vector2(0.5f);
+                    
 
                     break;
             }

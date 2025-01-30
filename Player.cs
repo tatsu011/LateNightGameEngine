@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LateNightGameEngine
 {
-    internal class Player : GameObject
+    internal class Player : KinematicBody
     {
         public override Vector2 Position { get; set; }
         public override Vector2 Origin { get; set; }
@@ -18,19 +18,13 @@ namespace LateNightGameEngine
 
         AnimatedSprite2D Animator;
         Camera cam;
+        int Speed = 200;
 
-        public Player(Vector2 position, Vector2 scale, string tag) 
-        { 
+        public Player(Vector2 position, Vector2 scale, string tag) : base(position, scale, tag)
+        {
             Position = position;
-            Origin = position;
             Scale = scale;
             Tag = tag;
-        }
-
-
-        public override void OnDestroy()
-        {
-            
         }
 
         public override void OnLoad()
@@ -43,6 +37,8 @@ namespace LateNightGameEngine
             AddChild(Animator);
             cam = new Camera(true, "playerCam");
             AddChild(cam);
+
+            base.OnLoad();
         }
 
         public override void OnUpdate()
@@ -51,24 +47,24 @@ namespace LateNightGameEngine
             if(Input.ActionKeyHeld("Up"))
             {
                 isMoving = true;
-                Position.Y -= 1;
+                Velocity.Y = -Speed;
             }
             else if (Input.ActionKeyHeld("Down"))
             {
                 isMoving = true;
-                Position.Y += 1;
+                Velocity.Y = Speed;
             }
             if (Input.ActionKeyHeld("Right"))
             {
                 isMoving = true;
                 Animator.FlipH = 1;
-                Position.X += 1;
+                Velocity.X = Speed;
             }
             else if (Input.ActionKeyHeld("Left"))
             {
                 isMoving = true;
                 Animator.FlipH = -1;
-                Position.X -= 1;
+                Velocity.X = -Speed;
             }
 
 
@@ -78,8 +74,13 @@ namespace LateNightGameEngine
             }
             else
             {
+                
                 Animator.Play("Idle");
             }
+
+            Move();
+            Velocity = Vector2.Zero();
+            base.OnUpdate();
         }
     }
 }
