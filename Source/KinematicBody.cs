@@ -48,7 +48,7 @@ namespace LateNightGameEngine.Source
         {
             body = Engine.world.CreateBody(Position);
             body.CreateRectangle(Scale.X, Scale.Y, 1f, new Vector2());
-            body.BodyType = BodyType.Kinematic;
+            body.BodyType = BodyType.Dynamic;
             body.IgnoreGravity = true;
             body.IgnoreCCD = DisableCollision;
             body.FixtureList[0].Tag = Tag;
