@@ -53,8 +53,6 @@ namespace LateNightGameEngine.Source
             FrameRect = new IntRect((int)Frame.X, 0, (int)Frame.X, (int)Frame.Y); //... shouldn't that first arg be 0?
 
             sprite.Origin = frameSize * new Vector2(0.5f);
-
-            Log.Info($"Animation2D {Tag} has been registered.");
         }
 
 

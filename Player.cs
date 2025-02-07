@@ -16,9 +16,12 @@ namespace LateNightGameEngine
         public override string Tag { get; set; }
         public override List<GameObject> Children { get; set; }
 
+
         AnimatedSprite2D Animator;
         Camera cam;
         int Speed = 200;
+
+        bool lookingRight = true;
 
         public Player(Vector2 position, Vector2 scale, string tag) : base(position, scale, tag)
         {
@@ -43,44 +46,44 @@ namespace LateNightGameEngine
 
         public override void OnUpdate()
         {
-            bool isMoving = false;
-            if(Input.ActionKeyHeld("Up"))
-            {
-                isMoving = true;
-                Velocity.Y = -Speed;
-            }
-            else if (Input.ActionKeyHeld("Down"))
-            {
-                isMoving = true;
-                Velocity.Y = Speed;
-            }
-            if (Input.ActionKeyHeld("Right"))
-            {
-                isMoving = true;
-                Animator.FlipH = 1;
-                Velocity.X = Speed;
-            }
-            else if (Input.ActionKeyHeld("Left"))
-            {
-                isMoving = true;
-                Animator.FlipH = -1;
-                Velocity.X = -Speed;
-            }
+            Velocity.X = Convert.ToInt32(Input.ActionKeyHeld("Right")) - Convert.ToInt32(Input.ActionKeyHeld("Left"));
+            Velocity.Y = Convert.ToInt32(Input.ActionKeyHeld("Down")) - Convert.ToInt32(Input.ActionKeyHeld("Up"));
+
+            Velocity = Velocity.Normalize() * Speed;
 
 
-            if (isMoving)
+            Move();
+            AnimationHandler();
+            base.OnUpdate();
+        }
+
+        void AnimationHandler()
+        {
+            if (Velocity.X == 0 && Velocity.Y == 0)
             {
-                Animator.Play("Run");
+                Animator.Play("Idle");
             }
             else
             {
-                
-                Animator.Play("Idle");
+                Animator.Play("Run");
             }
 
-            Move();
-            Velocity = Vector2.Zero();
-            base.OnUpdate();
+            if(Velocity.X > 0 && !lookingRight)
+            {
+                flip();
+            }
+            if(Velocity.X < 0 && lookingRight)
+            {
+                flip();
+            }
+
         }
+
+        void flip()
+        {
+            Animator.FlipH = -Animator.FlipH;
+            lookingRight = !lookingRight;
+        }
+
     }
 }

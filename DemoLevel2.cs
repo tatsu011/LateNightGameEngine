@@ -11,6 +11,7 @@ namespace LateNightGameEngine
     internal class DemoLevel2 : Level
     {
         Player player;
+        Label label;
 
         public override string Name { get; set; }
         public override bool Init { get; set; }
@@ -21,10 +22,7 @@ namespace LateNightGameEngine
 
         public override void OnLoad()
         {
-            Shape2D box = new Shape2D(Shape2D.Shapes.Rectangle, new Vector2(300),new Vector2(50),"box", Color.Transparent, Color.Red);
-            Shape2D box2 = new Shape2D(Shape2D.Shapes.Circle, new Vector2(300), new Vector2(25), "circle", Color.Transparent, Color.Blue);
-            player = new Player(new Vector2(400, 400), Vector2.Zero(), "Player");
-            player.CollisionDebug(true);
+            label = new Label("Victory!", 12, new Vector2(640, 360), Color.White, "Victory", true);
         }
 
         public override void OnUpdate()
