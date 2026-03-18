@@ -14,7 +14,7 @@ namespace LateNightGameEngine.Source
         public string Tag;
 
 
-        public SoundEffect(string path, string tag)
+        public SoundEffect(string path, string tag, bool looping = false)
         {
             Tag = tag;
 
@@ -29,11 +29,12 @@ namespace LateNightGameEngine.Source
             }
 
             SoundPlayer = new Sound(Buffer);
+            SoundPlayer.Loop = looping;
 
 
         }
 
-        public void Play(bool loop = false)
+        public void Play()
         {
             SoundPlayer.Play();
         }
