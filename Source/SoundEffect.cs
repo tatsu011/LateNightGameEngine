@@ -32,5 +32,15 @@ namespace LateNightGameEngine.Source
 
 
         }
+
+        public void Play(bool loop = false)
+        {
+            SoundPlayer.Play();
+        }
+
+        public void Stop()
+        {
+            SoundPlayer.Stop();
+        }
     }
 }
