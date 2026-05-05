@@ -9,7 +9,7 @@ namespace LateNightGameEngine.Source
 {
     internal class SoundEffect
     {
-        SoundBuffer Buffer;
+        readonly SoundBuffer Buffer;
         public Sound SoundPlayer;
         public string Tag;
 
@@ -28,8 +28,10 @@ namespace LateNightGameEngine.Source
                 return;
             }
 
-            SoundPlayer = new Sound(Buffer);
-            SoundPlayer.Loop = looping;
+            SoundPlayer = new(Buffer)
+            {
+                Loop = looping
+            };
 
 
         }

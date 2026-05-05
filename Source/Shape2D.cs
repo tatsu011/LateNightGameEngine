@@ -35,7 +35,7 @@ namespace LateNightGameEngine.Source
             Tag = tag;
             Color = color;
             OutlineColor = outlineColor;
-            Children = new List<GameObject>();
+            Children = [];
 
             Log.Info($"Registered a new {Shape}, called {Tag}");
         }
@@ -47,7 +47,7 @@ namespace LateNightGameEngine.Source
             Origin = position;
             Scale = scale;
             Tag = tag;
-            Children = new List<GameObject>();
+            Children = [];
 
             Log.Info($"Registered a new {Shape}, called {Tag}");
         }
@@ -68,32 +68,38 @@ namespace LateNightGameEngine.Source
             switch (Shape)
             {
                 case Shapes.Rectangle:
-                    RectangleShape graphics = new RectangleShape(Scale);
-                    graphics.Position = Position;
-                    graphics.FillColor = Color;
-                    graphics.Origin = Scale * new Vector2(0.5f, 0.5f);
-                    graphics.OutlineColor = OutlineColor;
-                    graphics.OutlineThickness = OutlineThickness;
+                    RectangleShape graphics = new(Scale)
+                    {
+                        Position = Position,
+                        FillColor = Color,
+                        Origin = Scale * new Vector2(0.5f, 0.5f),
+                        OutlineColor = OutlineColor,
+                        OutlineThickness = OutlineThickness
+                    };
                     Engine.App.Draw(graphics);
                     break;
                 case Shapes.Circle:
-                    CircleShape circle = new CircleShape(Scale.X);
-                    circle.Position = Position;
-                    circle.FillColor = Color;
-                    circle.Origin = Scale * new Vector2(0.5f, 0.5f);
-                    circle.OutlineColor = OutlineColor;
-                    circle.OutlineThickness = OutlineThickness;
+                    CircleShape circle = new(Scale.X)
+                    {
+                        Position = Position,
+                        FillColor = Color,
+                        Origin = Scale * new Vector2(0.5f, 0.5f),
+                        OutlineColor = OutlineColor,
+                        OutlineThickness = OutlineThickness
+                    };
                     Engine.App.Draw(circle);
                     break;
                 case Shapes.Capsule:
                     //2 circles and a rectangle in the center.
-                    CircleShape top = new CircleShape(Scale.X / 2);
-                    CircleShape bottom = new CircleShape(Scale.X / 2);
-                    RectangleShape center = new RectangleShape(new Vector2(Scale.X, Scale.Y / 2));
-                    center.Position = Position;
-                    center.FillColor = Color;
-                    center.Origin = Scale * new Vector2(0.5f);
-                    
+                    CircleShape top = new(Scale.X / 2);
+                    CircleShape bottom = new(Scale.X / 2);
+                    RectangleShape center = new(new Vector2(Scale.X, Scale.Y / 2))
+                    {
+                        Position = Position,
+                        FillColor = Color,
+                        Origin = Scale * new Vector2(0.5f)
+                    };
+
 
                     break;
             }
