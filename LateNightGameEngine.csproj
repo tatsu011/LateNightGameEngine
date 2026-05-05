@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aether.Physics2D" Version="2.1.0" />
-    <PackageReference Include="SFML.Net" Version="2.6.0" />
+    <PackageReference Include="Aether.Physics2D" Version="2.2.0" />
+    <PackageReference Include="SFML.Net" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
