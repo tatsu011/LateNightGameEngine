@@ -70,7 +70,7 @@ namespace LateNightGameEngine.Source
 
         public override void OnUpdate()
         {
-            Text displayText = new Text(Text, Font, FontSize);
+            Text displayText = new Text(Font, Text, FontSize);
             if (Centered)
             {
                 FloatRect textRect = displayText.GetLocalBounds();

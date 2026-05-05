@@ -50,7 +50,7 @@ namespace LateNightGameEngine.Source
             }
 
             sprite = new Sprite(texture);
-            FrameRect = new IntRect((int)Frame.X, 0, (int)Frame.X, (int)Frame.Y); //... shouldn't that first arg be 0?
+            FrameRect = new IntRect(new SFML.System.Vector2i((int)Frame.X, 0),new SFML.System.Vector2i( (int)Frame.X, (int)Frame.Y)); //... shouldn't that first arg be 0?
 
             sprite.Origin = frameSize * new Vector2(0.5f);
         }
@@ -69,7 +69,7 @@ namespace LateNightGameEngine.Source
 
             Vector2 framePos = new Vector2(x, y);
             Vector2 newPos = framePos * Frame;
-            FrameRect = new IntRect((int)newPos.X - 16,(int)newPos.Y - 16, (int)Frame.X, (int)Frame.Y);
+            FrameRect = new IntRect(new SFML.System.Vector2i((int)newPos.X - 16,(int)newPos.Y - 16),new SFML.System.Vector2i((int)Frame.X, (int)Frame.Y));
         }
 
     }

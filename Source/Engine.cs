@@ -1,5 +1,6 @@
 ﻿using nkast.Aether.Physics2D.Dynamics;
 using SFML.Graphics;
+using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -41,11 +42,12 @@ namespace LateNightGameEngine.Source
             //Assign variables.
             Width = width;
             Height = height;
+            Vector2u size = new Vector2u(Width, Height);
             Title = title;
             WindowColor = windowColor;
 
             //initialize the app.
-            App = new RenderWindow(new VideoMode(Width, Height), Title, style: Styles.Resize | Styles.Close);
+            App = new RenderWindow(new VideoMode(size), Title, style: Styles.Resize | Styles.Close, State.Windowed);
 
             //Assign Events
             App.KeyPressed += App_KeyPressed;
@@ -64,7 +66,7 @@ namespace LateNightGameEngine.Source
             if (sender != null)
             {
                 RenderWindow window = (RenderWindow)sender;
-                FloatRect drawSpace = new FloatRect(0,0, e.Width, e.Height);
+                FloatRect drawSpace = new FloatRect(new Vector2f(0,0),(Vector2f)e.Size);
                 window.SetView(new View(drawSpace));
 
                 //also call any corresponding update function for this.

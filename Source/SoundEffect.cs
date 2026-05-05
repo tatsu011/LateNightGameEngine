@@ -30,7 +30,7 @@ namespace LateNightGameEngine.Source
 
             SoundPlayer = new(Buffer)
             {
-                Loop = looping
+                IsLooping = looping
             };
 
 

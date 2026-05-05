@@ -90,11 +90,10 @@ namespace LateNightGameEngine.Source
                 CurrentFrame = (CurrentFrame == CurrentAnimation.TotalFrames - 1) ? 0 : CurrentFrame + 1;
                 elapsedTime = 0f;
             }
-
-            CurrentAnimation.FrameRect = new IntRect((int)(CurrentFrame * CurrentAnimation.Frame.X), 
-                                                     0,
+            CurrentAnimation.FrameRect = new IntRect(new SFML.System.Vector2i((int)(CurrentFrame * CurrentAnimation.Frame.X), 
+                                                     0), new SFML.System.Vector2i(
                                                      (int)CurrentAnimation.Frame.X, 
-                                                     (int)CurrentAnimation.Frame.Y);
+                                                     (int)CurrentAnimation.Frame.Y));
 
             CurrentAnimation.sprite.Position= Position;
             CurrentAnimation.sprite.Scale = new Vector2(Scale.X * FlipH, Scale.Y * FlipV);
